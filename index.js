@@ -20,7 +20,10 @@ const DATA_PATH = path.resolve('./data.json');
 const ID_PATH = path.resolve('./id.txt');
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow requests from this domain
+  optionsSuccessStatus: 200 // Set the status code for successful preflight requests
+}));
 
 function writeToFile(data) {
   fs.writeFile(DATA_PATH, JSON.stringify(data, undefined, 2), (err) => {
